@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<!DOCTYPE html>
+<%@ page contentType="text/html; charset=utf-8" %>
 <html>
 <head>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -8,6 +7,7 @@
 	<title>Welcome !</title>
 </head>
 <body>
+	<%-- navigation bar --%>
 	<nav class="navbar navbar-expand navbar-dark bg-dark">
 		<div class="container">
 			<div class="navbar-header">
@@ -15,10 +15,12 @@
 			</div>
 		</div>
 	</nav>
+	<%-- main --%>
 	<main role="main">
 		<h1>Hello World</h1>
 		
 	</main>
+	<%-- footer --%>
 	<footer class = "container">
 		<p>&copy; WebProject</p>
 	</footer>
