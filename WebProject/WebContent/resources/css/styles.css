@@ -11389,7 +11389,7 @@ p {
   #mainNav.navbar-shrink {
     padding-top: 1rem;
     padding-bottom: 1rem;
-    background-color: #212529;
+    background-color: #795a22;
   }
   #mainNav.navbar-shrink .navbar-brand {
     font-size: 1.25em;
@@ -11406,18 +11406,29 @@ p {
   }
 }
 header.masthead {
+  /*
   padding-top: 10.5rem;
   padding-bottom: 6rem;
+  */
   text-align: center;
   color: #fff;
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
   background-size: cover;
-  background-image: url("../image/header-bg.jpg");  
-  /*
-  */
+  background-image: url("../image/main_bg.jpg");  
 }
+
+header.main-size {
+  padding-top: 10.5rem;
+  padding-bottom: 6rem;
+}
+
+header.else-size {
+  padding-top: 6.5rem;
+  padding-bottom: 4rem;
+}
+
 header.masthead .masthead-subheading {
   font-size: 1.5rem;
   font-style: italic;
@@ -11434,9 +11445,13 @@ header.masthead .masthead-heading {
 }
 
 @media (min-width: 768px) {
-  header.masthead {
-    padding-top: 17rem;
-    padding-bottom: 12.5rem;
+  header.main-size {
+  padding-top: 12rem;
+  padding-bottom: 8rem;
+  }
+  header.else-size {
+  padding-top: 7.0rem;
+  padding-bottom: 4rem;
   }
   header.masthead .masthead-subheading {
     font-size: 2.25rem;

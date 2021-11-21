@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
 	<div class="container">
-		<a class="navbar-brand" href="./home.jsp"><i class="fa fa-home" style="color:yellow" aria-hidden="true"></i></a>
+		<a class="navbar-brand" href="home.jsp"><i class="fa fa-home" style="color:black" aria-hidden="true"></i></a>
 		<!-- a class="navbar-brand" href="#page-top"><img src="./resources/image/navbar-logo.svg" alt="..." /></a-->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
@@ -12,7 +12,7 @@
                 <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
                 <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
-                <li class="nav-item"><a class="nav-link" href="#contact">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
             </ul>
         </div>
 	</div>
