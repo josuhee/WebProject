@@ -66,7 +66,7 @@
 			</form>
 			<hr/>
 			<div class="d-grid gap-2">
-				<button class="btn btn-lg btn-danger btn-block" type="submit">회원가입</button>
+				<a class="btn btn-lg btn-danger btn-block text-white" href="addMember.jsp">회원가입</a>
 			</div>
 			<%} %>
 		</div>
