@@ -26,7 +26,6 @@
 	<%-- main --%>
 	<main role="main">
 		<h1>Hello World</h1>
-		<p> 사용자 <%= request.getRemoteUser() %>
 	</main>
 	<%-- footer --%>
 	<jsp:include page="footer.jsp"/>

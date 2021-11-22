@@ -14,14 +14,34 @@
 </head>
 <body>
 	<jsp:include page="nav.jsp"/>
+	<%
+		String check_role = (String) session.getAttribute("role");
+	
+		if (check_role != null) {
+	%>
 	<header class="masthead else-size">
+		<div class="container">
+        	<div class="masthead-subheading text-uppercase">Already Login ...</div>
+        </div>
+    </header>
+    <%
+		} else {
+    %>
+    <header class="masthead else-size">
 		<div class="container">
 			<div class="masthead-subheading">Please login</div>
         	<div class="masthead-heading text-uppercase">로그인</div>
         </div>
     </header>
+    <%} %>
 	<div class="container" align="center">
 		<div class="col-md-6 col-md-offset-4" style="margin:40px">
+		<%
+			if (check_role != null) {
+				out.print("<h2 align=\"center\" style=\"margin:40px;\">이미 로그인 된 계정입니다.</h2>");
+				out.print("<a class=\"btn btn-xl btn-warning btn-block text-uppercase\" href=\"home.jsp\">홈으로</a>");
+			} else {
+		%>
 			<h2 class="form-signin-heading" style="margin-bottom:20px">Please sign in</h2>
 			<%
 				String error=request.getParameter("error");
@@ -38,12 +58,17 @@
 				<div class="form-group">
 					<input type="password" name="passwd" class="form-control"	placeholder="Password" required/>
 				</div>
+				<div class="form-group">
+					<input type="radio" name="role" value="customer" checked/> 고객
+					<input type="radio" name="role" value="seller" /> 판매자
+				</div>
 				<button class="btn btn btn-lg btn-success btn-block" type="submit">로그인</button>
 			</form>
 			<hr/>
 			<div class="d-grid gap-2">
 				<button class="btn btn-lg btn-danger btn-block" type="submit">회원가입</button>
 			</div>
+			<%} %>
 		</div>
 	</div>
 	<jsp:include page="footer.jsp"/>

@@ -11,12 +11,13 @@
 		
 		String id = request.getParameter("id");
 		String passwd = request.getParameter("passwd");
+		String role = request.getParameter("role");
 		boolean flag = true;
 		
 		ResultSet rs = null;
 		Statement stmt = null;
 		try {
-			String sql = "select id, passwd from customer where id = '" + id + "'";
+			String sql = "select id, passwd from " + role + " where id = '" + id + "'";
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			
@@ -39,7 +40,8 @@
 		
 		if (flag)
 		{
-			
+			session.setAttribute("userID", id);
+			session.setAttribute("role", role);
 			response.sendRedirect("home.jsp");
 		}
 		else
