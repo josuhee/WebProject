@@ -3,6 +3,7 @@
 <html>
 <head>
 <title>Check</title>
+<script src="resources/js/addMember.js"></script>
 </head>
 <body>
 	<%@ include file="dbconn.jsp" %>
@@ -36,10 +37,17 @@
 				conn.close();
 		}
 		
-		if (flag)
+		if (flag){
 			out.print("사용 가능한 아이디 입니다.");
+		%>
+			<script type="text/javascript">
+				opener.document.getElementById('submit_btn').disabled=false;
+			</script>	
+		<%
+		}
 		else
 			out.print("중복된 아이디 입니다.");
 	%>
+	
 </body>
 </html>
