@@ -53,7 +53,7 @@
 			%>
 			<form class="form-signin" action="login_process.jsp" method="post">
 				<div class="form-group">
-					<input type="text" name="id" class="form-control" placeholder="ID" required autofocus/>
+					<input type="text" name="id" class="form-control" placeholder="ID" autocomplete="off" required autofocus/>
 				</div>
 				<div class="form-group">
 					<input type="password" name="passwd" class="form-control"	placeholder="Password" required/>

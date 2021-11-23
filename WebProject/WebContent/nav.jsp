@@ -1,4 +1,4 @@
-
+<%@ page contentType="text/html; charset=utf-8" %>
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
 	<div class="container">
 		<a class="navbar-brand" href="home.jsp"><i class="fa fa-home" style="color:black" aria-hidden="true"></i></a>
@@ -7,17 +7,20 @@
                     Menu
         	<i class="fas fa-bars ms-1"></i>
 		</button>
+		<% String role = (String) session.getAttribute("role"); %>
         <div class="collapse navbar-collapse" id="navbarResponsive">
         	<ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-            	<li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+        		<%
+        			if (role != null && role.equals("seller")) { %>
+            			<li class="nav-item"><a class="nav-link" href="addProduct.jsp">Product</a></li>
+            	<%	} %>
+                <li class="nav-item"><a class="nav-link" href="#portfolio">Market</a></li>
                 <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
                 <%
-                	String role = (String) session.getAttribute("role");
-                	
-                	if (role != null)
-                		out.print("<li class=\"nav-item\"><a class=\"nav-link\" href=\"logout.jsp\">Logout</a></li>");
+                	if (role != null){ %>
+	                	<li class="nav-item"><a class="nav-link" href="#team">My</a></li>                		
+                		<li class="nav-item"><a class="nav-link" href="logout.jsp">Logout</a></li>
+                <%	}
                 	else
                 		out.print("<li class=\"nav-item\"><a class=\"nav-link\" href=\"login.jsp\">Login</a></li>");
                 %>              
