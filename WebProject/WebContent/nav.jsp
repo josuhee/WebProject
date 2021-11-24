@@ -7,7 +7,10 @@
                     Menu
         	<i class="fas fa-bars ms-1"></i>
 		</button>
-		<% String role = (String) session.getAttribute("role"); %>
+		<% 
+			String role = (String) session.getAttribute("role");
+			String id = (String) session.getAttribute("userID");
+		%>
         <div class="collapse navbar-collapse" id="navbarResponsive">
         	<ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
         		<%
@@ -18,7 +21,7 @@
                 <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                 <%
                 	if (role != null){ %>
-	                	<li class="nav-item"><a class="nav-link" href="#team">My</a></li>                		
+	                	<li class="nav-item"><a class="nav-link" href="myInfo_<%=role%>.jsp?id=<%=id%>">My</a></li>                		
                 		<li class="nav-item"><a class="nav-link" href="logout.jsp">Logout</a></li>
                 <%	}
                 	else

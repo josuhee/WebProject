@@ -13,6 +13,15 @@
     <link href="./resources/css/styles.css" rel="stylesheet" />
 </head>
 <body>
+	<%
+		request.setCharacterEncoding("utf-8");
+		String role = (String) session.getAttribute("role");
+		String s_id = (String) session.getAttribute("userID");
+		String p_id = request.getParameter("id");
+		
+		if (role == null || s_id == null || p_id == null || !role.equals("customer") || !s_id.equals(p_id))
+			response.sendRedirect("NoPermission.jsp");
+	%>
 	<jsp:include page="nav.jsp"/>
     <header class="masthead else-size">
 		<div class="container">
@@ -24,7 +33,7 @@
 		<div class="row">
 			<div class="col-md-2">
 				<div class="btn-group-vertical col-md">
-					<button type="button" class="btn btn-outline-dark" style="padding: 10px 20px;">계정</button>
+					<button type="button" class="btn btn-outline-dark" onclick="location.href='myInfo_customer.jsp?id=<%= s_id %>'" style="padding: 10px 20px;">계정</button>
 					<button type="button" class="btn btn-outline-dark" style="padding: 10px 20px;">장바구니</button>
 					<button type="button" class="btn btn-outline-dark" style="padding: 10px 20px;">주문현황</button>
 				</div>
@@ -38,7 +47,7 @@
 						<hr/>
 						<h4 class="card-title">ID</h4>
 						<hr/>
-						<p class="card-text">name</p>
+						<p class="card-text"><%= s_id %></p>
 						<br/>
 						<hr/>
 						<h4 class="card-title">Category</h4>
