@@ -14,26 +14,18 @@
     <link href="./resources/css/styles.css" rel="stylesheet" />
 </head>
 <body>
-	<jsp:include page="nav.jsp"/>
 	<%
+		request.setCharacterEncoding("utf-8");
 		String check_role = (String) session.getAttribute("role");
 	
-		if (check_role == null || !check_role.equals("seller")) {
-	%>
-		<header class="masthead else-size">
-			<div class="container">
-	        	<div class="masthead-subheading text-uppercase">You don't have any permission.</div>
-	        </div>
-    	</header>
-    	<div class="container" align="center">
-			<div class="col-md-6 col-md-offset-4" style="margin:40px">
-				<h2 align="center" style="margin:40px;">접근 권한이 없습니다.</h2>
-				<a class="btn btn-xl btn-warning btn-block text-uppercase" href="home.jsp">홈으로</a>
-			</div>
-		</div>
-    <%
-		} else {
+		if (check_role == null || !check_role.equals("seller"))
+			response.sendRedirect("NoPermission.jsp");
+		
+		String success = request.getParameter("success");
+		if (success != null && success.equals("1"))
+			out.print("<script>alert('성공적으로 제품을 등록하였습니다.')</script>");
     %>
+	<jsp:include page="nav.jsp"/>
     <header class="masthead else-size">
 		<div class="container">
 			<div class="masthead-subheading">Upload Product</div>
@@ -66,20 +58,19 @@
 				<div class="form-group row">
 				    <label class="col-sm-3 align-self-center mb-0">상세 정보</label>
 				    <div class="col-sm-8">
-					    <textarea class="form-control" id="exampleTextarea" placeholder="description" rows="3" style="height: 121px;"></textarea>
+					    <textarea class="form-control" id="description" name="description" placeholder="description" rows="3" style="height: 121px;"></textarea>
 				    </div>
 			    </div>
 			    <div class="form-group row">
 					<label class="col-sm-3">이미지</label>
 					<div class="col-sm-8">
-						<input type="file" name="productImage" class="form-control"/>
+						<input type="file" accept="image/*" name="productImage" class="form-control"/>
 					</div>
 				</div>
 				<input type="button" value="등록하기" class="btn btn btn-lg btn-success btn-block" id="submit_btn" onclick="checkList()"/>
 			</form>
 		</div>
 	</div>
-    <%} %>
 	<jsp:include page="footer.jsp"/>
 	<!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

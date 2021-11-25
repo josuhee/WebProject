@@ -20,7 +20,7 @@
                 <li class="nav-item"><a class="nav-link" href="#portfolio">Market</a></li>
                 <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                 <%
-                	if (role != null){ %>
+                	if (role != null && id != null){ %>
 	                	<li class="nav-item"><a class="nav-link" href="myInfo_<%=role%>.jsp?id=<%=id%>">My</a></li>                		
                 		<li class="nav-item"><a class="nav-link" href="logout.jsp">Logout</a></li>
                 <%	}

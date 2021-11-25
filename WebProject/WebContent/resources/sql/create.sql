@@ -15,7 +15,9 @@ create table if not exists product(
 	name varchar(30),
 	price int,
 	unitsInStock int,
+	description TEXT,
 	filename varchar(50),
+	currDate datetime,
 	seller_id varchar(30),
 	foreign key (seller_id) references seller(id)
 )DEFAULT CHARSET=utf8;
