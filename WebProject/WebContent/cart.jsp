@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8" %>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="dto.Product" %>
 <html>
 <head>
 	<title>Welcome</title>
@@ -17,16 +19,15 @@
 		request.setCharacterEncoding("utf-8");
 		String role = (String) session.getAttribute("role");
 		String s_id = (String) session.getAttribute("userID");
-		String p_id = request.getParameter("id");
 		
-		if (role == null || s_id == null || p_id == null || !role.equals("customer") || !s_id.equals(p_id))
+		if (role == null || s_id == null || !role.equals("customer"))
 			response.sendRedirect("NoPermission.jsp");
 	%>
 	<jsp:include page="nav.jsp"/>
     <header class="masthead else-size">
 		<div class="container">
-			<div class="masthead-subheading">My Information</div>
-        	<div class="masthead-heading text-uppercase">내 정보</div>
+			<div class="masthead-subheading">My Cart</div>
+        	<div class="masthead-heading text-uppercase">장바구니</div>
         </div>
     </header>
 	<div class="container" align="center" style="margin-top:50px">
@@ -41,18 +42,20 @@
 			<div class="col-md">
 				<div class="card text-black bg-white mb-3 border-dark" style="width: 100%; height: 500px;">
 					<div class="card-header border-dark">
-						<h3 class="align-self-center m-0">개인 정보</h3>
+						<h3 class="align-self-center m-0">장바구니</h3>
 					</div>
 					<div class="card-body ml-5">
-						<hr/>
-						<h4 class="card-title">ID</h4>
-						<hr/>
-						<p class="card-text"><%= s_id %></p>
-						<br/>
-						<hr/>
-						<h4 class="card-title">Category</h4>
-						<hr/>
-						<p class="card-text">고객</p>
+						<%
+							ArrayList<Product> cartList = (ArrayList<Product>) session.getAttribute(s_id + "_cart");
+							if (cartList == null)
+								cartList = new ArrayList<Product>();
+							
+							int size = cartList.size();
+							for (int i = 0; i < size; i++) {
+								Product product = cartList.get(i);
+								out.print(product.getP_name() + "<br/>");
+							}
+						%>
 					</div>
 				</div>
 			</div>

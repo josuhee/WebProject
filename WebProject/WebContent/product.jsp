@@ -62,7 +62,7 @@
 					<h3 class="section-subheading text-muted my-1" style="font-size: 1.5rem;">Price : <%= price %></h3>
 					<h3 class="section-subheading text-muted my-1" style="font-size: 1.5rem;">Stock : <%= unitsInStock %></h3>
 					<div class="mt-3">
-						<a href="cart.jsp" class="btn btn-warning m-1"> 담기 &raquo;</a>
+						<a href="addCart.jsp?id=<%= id %>" class="btn btn-warning m-1"> 담기 &raquo;</a>
 						<a href="products.jsp" class="btn btn-secondary m-1"> 둘러보기 &raquo;</a>				
 					</div>
 				</div>
@@ -70,7 +70,12 @@
 		</div>
 	<%
 				} else {
-					//없는 페이지!!!!!!
+					if (rs != null)
+						rs.close();
+					if (stmt != null)
+						stmt.close();
+					if (conn != null)
+						conn.close();
 					response.sendRedirect("errorPage.jsp");
 				}
 			} catch (SQLException ex) {
