@@ -1,6 +1,6 @@
 package dto;
 
-public class Product {
+public class Product implements Comparable<Product>{
 	private int id;
 	private String p_name;
 	private int price;
@@ -49,5 +49,7 @@ public class Product {
 		this.seller = seller;
 	}
 	
-	
+	public int compareTo(Product product) {
+		return this.seller.compareTo(product.seller);
+	}
 }

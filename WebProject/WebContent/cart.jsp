@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="dto.Product" %>
+<%@ page import="java.util.Collections"%>
 <html>
 <head>
 	<title>Welcome</title>
@@ -40,22 +41,51 @@
 				</div>
 			</div>
 			<div class="col-md">
-				<div class="card text-black bg-white mb-3 border-dark" style="width: 100%; height: 500px;">
+				<div class="card text-black bg-white mb-3 border-dark" style="width: 100%; min-height : 300px;">
 					<div class="card-header border-dark">
 						<h3 class="align-self-center m-0">장바구니</h3>
 					</div>
-					<div class="card-body ml-5">
-						<%
-							ArrayList<Product> cartList = (ArrayList<Product>) session.getAttribute(s_id + "_cart");
-							if (cartList == null)
-								cartList = new ArrayList<Product>();
-							
-							int size = cartList.size();
-							for (int i = 0; i < size; i++) {
-								Product product = cartList.get(i);
-								out.print(product.getP_name() + "<br/>");
+					<div class="card-body p-4">
+					<%
+						ArrayList<Product> cartList = (ArrayList<Product>) session.getAttribute(s_id + "_cart");
+						if (cartList == null)
+							cartList = new ArrayList<Product>();
+						else Collections.sort(cartList);
+						
+						boolean flag = true; 
+						int size = cartList.size();
+						for (int i = 0; i < size; i++) {
+							Product product = cartList.get(i);
+							if (flag) {%>
+							<div class="container p-0" align="left">
+								<p class="badge bg-secondary" style="font-size:1.5rem;"><%= product.getSeller() %></p>
+								<table class="table table-striped table-bordered text-center">
+									<tr class="border border-1 border-dark">
+										<th class="col-md-3">제품명</th>
+										<th class="col-md-3">가격</th>
+										<th class="col-md-3">개수</th>
+										<th class="col-md-3">총합</th>
+										<th class="col-md-2">삭제</th>
+									</tr>
+							<% 
+								flag = false;
+							}%>
+									<tr>
+										<td><%= product.getP_name() %></td>
+										<td><%= product.getPrice() %></td>
+										<td><%= product.getCnt() %></td>
+										<td><%= product.getPrice() * product.getCnt()%></td>
+										<td><a href="#" class="badge badge-danger">삭제</a></td>
+									</tr>
+							<%
+							if (i == size - 1 || (i < size - 1 && !product.getSeller().equals(cartList.get(i + 1).getSeller()))) {%>
+								</table>
+							</div>
+							<br/>
+							<% flag = true;	
 							}
-						%>
+						}
+					%>
 					</div>
 				</div>
 			</div>

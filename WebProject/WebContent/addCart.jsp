@@ -8,7 +8,7 @@
 	String id = request.getParameter("id");
 	String userId = (String) session.getAttribute("userID");
 	String role = (String) session.getAttribute("role");
-	String redirect_url = "product.jsp?id="+id;
+	String redirect_url = "product.jsp?id="+id +"&success=1";
 	if (id == null)
 		redirect_url="errorPage.jsp";
 	else if (userId == null || role == null || role.equals("seller"))

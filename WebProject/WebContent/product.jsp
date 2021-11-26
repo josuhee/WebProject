@@ -17,9 +17,12 @@
 	<%
 		request.setCharacterEncoding("utf-8");
 		String id = request.getParameter("id");
+		String suc = request.getParameter("success");
 		
 		if (id == null)
 			response.sendRedirect("errorPage.jsp");
+		if (suc != null && suc.equals("1"))
+			out.print("<script>alert('장바구니에 넣었습니당')</script>");
 	%>
 	<jsp:include page="nav.jsp"/>
     <header class="masthead else-size">
