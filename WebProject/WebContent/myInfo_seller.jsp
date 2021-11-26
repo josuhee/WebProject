@@ -35,7 +35,7 @@
 			<div class="col-md-2">
 				<div class="btn-group-vertical col-md">
 					<button type="button" class="btn btn-outline-dark" onclick="location.href='myInfo_seller.jsp?id=<%= s_id %>'" style="padding: 10px 20px;">계정</button>
-					<button type="button" class="btn btn-outline-dark" style="padding: 10px 20px;">글 관리</button>
+					<button type="button" class="btn btn-outline-dark" onclick="location.href='productManagement.jsp'" style="padding: 10px 20px;">글 관리</button>
 					<button type="button" class="btn btn-outline-dark" style="padding: 10px 20px;">주문현황</button>
 				</div>
 			</div>
