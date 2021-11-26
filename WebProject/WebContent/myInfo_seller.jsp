@@ -31,12 +31,16 @@
     </header>
 	<div class="container" align="center" style="margin-top:50px">
 		<div class="row">
+			<%-- 왼쪽 바 --%>
 			<div class="col-md-2">
 				<div class="btn-group-vertical col-md">
 					<button type="button" class="btn btn-outline-dark" onclick="location.href='myInfo_seller.jsp?id=<%= s_id %>'" style="padding: 10px 20px;">계정</button>
+					<button type="button" class="btn btn-outline-dark" style="padding: 10px 20px;">글 관리</button>
 					<button type="button" class="btn btn-outline-dark" style="padding: 10px 20px;">주문현황</button>
 				</div>
 			</div>
+			
+			<%-- 본문 --%>
 			<div class="col-md">
 				<div class="card text-black bg-white mb-3 border-dark" style="width: 100%; height: 500px;">
 					<div class="card-header border-dark">

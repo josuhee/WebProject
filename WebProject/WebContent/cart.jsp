@@ -75,7 +75,7 @@
 										<td><%= product.getPrice() %></td>
 										<td><%= product.getCnt() %></td>
 										<td><%= product.getPrice() * product.getCnt()%></td>
-										<td><a href="#" class="badge badge-danger">삭제</a></td>
+										<td><a href="removeCart.jsp?id=<%= product.getId() %>" class="badge badge-danger">삭제</a></td>
 									</tr>
 							<%
 							if (i == size - 1 || (i < size - 1 && !product.getSeller().equals(cartList.get(i + 1).getSeller()))) {%>
