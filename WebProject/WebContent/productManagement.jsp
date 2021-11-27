@@ -53,7 +53,7 @@
 							Statement stmt = null;
 							
 							try {
-								String sql = "select * from product where seller_id=" + s_id + " order by id desc";
+								String sql = "select * from product where seller_id='" + s_id + "' order by id desc";
 								stmt = conn.createStatement();
 								rs = stmt.executeQuery(sql);
 								
@@ -71,7 +71,7 @@
 									else
 										filename = "upload/" + filename;
 						%>
-						<div class="container" align="center" style="height: 250px;">
+						<div class="container" align="center" style="min-height: 250px;">
 							<div class="col-md row p-4">
 								<img class="col-md-3" style="height: 200px;" src="<%= filename%>"/>
 								<div class="col-md-6 p-4" align="left">
@@ -81,7 +81,7 @@
 									<h3 class="section-subheading text-muted my-1" style="font-size: 1.5rem;">Stock : <%= unitsInStock %></h3>
 								</div>
 								<div class="col-md-3  align-self-end">
-									<a href="#" class="btn btn-warning m-1"> 수정 &raquo;</a>
+									<a href="product_update.jsp?id=<%= id %>" class="btn btn-warning m-1"> 수정 &raquo;</a>
 									<a href="delete_product.jsp?id=<%= id %>" class="btn btn-danger m-1"> 삭제 &raquo;</a>	
 								</div>
 							</div>
@@ -90,7 +90,7 @@
 						<%
 								}
 							} catch (SQLException ex) {
-								out.print("Member 테이블 호출이 실패했습니다.<br/>");
+								out.print("product 테이블 호출이 실패했습니다.<br/>");
 								out.print("SQLException: " + ex.getMessage());
 							} finally {
 								if (rs != null)

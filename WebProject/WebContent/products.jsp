@@ -51,7 +51,7 @@
 					else
 						color = "#fff";
 		%>
-		<div class="container" align="center" style="height: 300px;">
+		<div class="container" align="center" style="min-height: 300px;">
 			<div class="col-md row p-4" style="background:<%=color%>">
 				<img class="col-md-3" style="height: 250px;" src="<%= filename%>"/>
 				<div class="col-md-7 p-4" align="left">
