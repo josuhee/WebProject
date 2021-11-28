@@ -8,20 +8,33 @@
 <title>update product process</title>
 </head>
 <body>
-	<%-- 
-	1. 물품id와 seller id를 select하여 존재하는지 확인
-	2. 있다면 update 준비 고
-	3. 없다면 errorpage로 고
-	
-	4. 업데이트 과정에 file이 바뀌면 기존 파일 삭제해주기
-	
-	 --%>
 	 <%
 		request.setCharacterEncoding("utf-8");
 		String check_role = (String) session.getAttribute("role");
 		String userId = (String) session.getAttribute("userID");
-		String id = request.getParameter("id");
+		
+		// multi request
+		String path = request.getSession().getServletContext().getRealPath("/");
+		path = path + "upload/";
+		MultipartRequest multi = new MultipartRequest(request, path,
+			5 * 1024 * 1024, "utf-8", new DefaultFileRenamePolicy());
 	
+		Enumeration params = multi.getParameterNames();
+		
+		String p_name = multi.getParameter("name");
+		String p_price = multi.getParameter("price");
+		String p_units = multi.getParameter("unitsInStock");
+		String p_description = multi.getParameter("description");
+		String id = multi.getParameter("id");
+
+		Enumeration files = multi.getFileNames();
+		
+		String filename = "";
+		while (files.hasMoreElements()) {
+			String name = (String) files.nextElement();
+			filename = multi.getFilesystemName(name);
+		}
+
 		if (check_role == null || userId == null || !check_role.equals("seller"))
 			response.sendRedirect("NoPermission.jsp");
 		else if (id == null)
@@ -31,33 +44,6 @@
 	 
 	<%@ include file="dbconn.jsp"%>
 	<%
-		// get request parameter
-		request.setCharacterEncoding("utf-8");
-		String path = request.getSession().getServletContext().getRealPath("/");
-		path = path + "upload/";
-		MultipartRequest multi = new MultipartRequest(request, path,
-			5 * 1024 * 1024, "utf-8", new DefaultFileRenamePolicy());
-	
-		String[] key = new String[4];
-		String[] value = new String[4];
-		
-		Enumeration params = multi.getParameterNames();
-		
-		int idx = 0;
-		while (params.hasMoreElements()) {
-			key[idx] = (String)params.nextElement();
-			value[idx] = multi.getParameter(key[idx]);
-			idx++;
-		}
-		
-		Enumeration files = multi.getFileNames();
-		
-		String filename = "";
-		while (files.hasMoreElements()) {
-			String name = (String) files.nextElement();
-			filename = multi.getFilesystemName(name); // 요자식이 중요
-		}
-		
 		boolean flag = false;
 		ResultSet rs = null;
 		Statement stmt = null;
@@ -69,44 +55,25 @@
     		// 수정하려는 곳이 실제로 있는지 확인
     		if (rs.next()){
     			// 만약 filename이 null이 아니라면 파일 삭제 진행
-    			
-    			// update 진행하기
-    			String p_name;
-    			String p_price;
-    			String p_units;
-    			String p_description;
-    			
-    			// 변수 삽입
-    			for (int i = 0; i < 4; i++){
-    				if (key[i].equals("name")){
-    					p_name = value[i];
-    					break;
-    				}
+    			String p_filename = rs.getString("filename");
+    			if (p_filename != null) {
+    				path = request.getSession().getServletContext().getRealPath("/");
+					path = path + "upload/" + p_filename;
+					
+					File f = new File(path);
+					if (f.exists()) {
+						f.delete();
+					}
     			}
-    			for (int i = 0; i < 4; i++){
-    				if (key[i].equals("price")){
-    					p_price = value[i];
-    					break;
-    				}
-    			}
-    			for (int i = 0; i < 4; i++){
-    				if (key[i].equals("unitsInStock")){
-    					p_units = value[i];
-    					break;
-    				}
-    			}
-    			for (int i = 0; i < 4; i++){
-    				if (key[i].equals("description")){
-    					p_description = value[i];
-    				}
-    			}
-    			
     			
     			// update용 sql 작성하기
-    			
+    			sql = "update product set name='" + p_name + "', price = " + p_price + ", unitsInStock = " + p_units + ", description = '" + p_description + "', filename = '" + filename + "' "
+    					+ "where id = " + id;
+    			stmt = conn.createStatement();
+    			stmt.executeUpdate(sql);
     		} else flag = true;		
 		} catch (SQLException ex) {
-			out.print("Product 테이블 삽입이 실패했습니다.<br/>");
+			out.print("Product 테이블 수정이 실패했습니다.<br/>");
 			out.print("SQLException: " + ex.getMessage());
 		} finally {
 			if (rs != null)
@@ -117,7 +84,7 @@
 				conn.close();
 		}
 		response.sendRedirect("productManagement.jsp");
+		}
 	%>
-	<% } %>
 </body>
 </html>

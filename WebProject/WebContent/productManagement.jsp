@@ -66,7 +66,7 @@
 									String filename = rs.getString("filename");
 									java.util.Date d = rs.getTimestamp("currDate");
 									SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-									if (filename == null)
+									if (filename == null || filename.equals("null"))
 										filename = "resources/image/empty.PNG";
 									else
 										filename = "upload/" + filename;

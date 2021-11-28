@@ -41,7 +41,7 @@
 					int price = rs.getInt("price");
 					int unitsInStock = rs.getInt("unitsInStock");
 					String filename = rs.getString("filename");
-					if (filename == null)
+					if (filename == null || filename.equals("null"))
 						filename = "resources/image/empty.PNG";
 					else
 						filename = "upload/" + filename;
