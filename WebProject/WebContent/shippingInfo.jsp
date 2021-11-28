@@ -52,7 +52,10 @@
 						<input type="text" id="address" name="address" class="form-control" placeholder="address" autocomplete="off" required/>
 					</div>
 				</div>
+				<%--
 				<input type="button" value="등록하기" class="btn btn btn-lg btn-success btn-block" id="submit_btn" onclick="checkList()"/>
+				 --%>
+				 <input type="submit" value="등록하기" class="btn btn btn-lg btn-success btn-block" id="submit_btn"/>
 			</form>
 		</div>
 	</div>

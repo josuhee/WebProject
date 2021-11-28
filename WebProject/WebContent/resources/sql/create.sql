@@ -27,7 +27,7 @@ create table if not exists orderform(
 	customer_id varchar(20),
 	seller_id varchar(20),
 	product_id int,
-	proudct_cnt int,
+	product_cnt int,
 	ship_name varchar(20),
 	ship_zipcode varchar(10),
 	ship_address varchar(50),
@@ -46,4 +46,4 @@ select * from seller;
 insert into product(name) values("hi2");
 select * from product;
 delete from product where id = 2;
-drop table product;
+drop table orderform;
