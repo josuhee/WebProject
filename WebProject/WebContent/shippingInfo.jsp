@@ -38,7 +38,7 @@
 				<div class="form-group row">
 					<label class="col-sm-3 align-self-center mb-0">우편 번호</label>
 					<div class="col-sm-8">
-						<input type="text" id="postal_code" name="postal_code" class="form-control" placeholder="postal code" autocomplete="off" required/>
+						<input type="text" id="zipcode" name="zipcode" class="form-control" placeholder="zip code" autocomplete="off" required/>
 					</div>
 				</div>
 				<div class="form-group row">

@@ -82,7 +82,7 @@
 								</table>
 							</div>
 							<div align="right">
-								<a href="shippingInfo.jsp?seller=<%= product.getSeller() %>" class="badge badge-info" style="font-size:1.0rem; text-decoration:none;">주문하기</a>
+								<a href="check_cookie.jsp?seller=<%= product.getSeller() %>" class="badge badge-info" style="font-size:1.0rem; text-decoration:none;">주문하기</a>
 							</div>
 							<br/>
 							<% flag = true;	
