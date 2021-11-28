@@ -26,9 +26,14 @@
     	cart list에 해당 seller_id가 있는지 확인
     	은 order process에 가서 할까? 여기서는 걍 배송지 정보만 입력하고 쿠키로 넘어가자
     --%>
+    <%
+    	String seller_id = request.getParameter("seller");
+    	if (seller_id == null)
+    		response.sendRedirect("errorPage.jsp");
+    %>
 	<div class="container" align="center">
 		<div class="col-md-6 col-md-offset-4" style="margin:40px">
-			<form class="form-signin" name="productForm" action="shippingInfo_process.jsp" method="post">
+			<form class="form-signin" name="productForm" action="shippingInfo_process.jsp?seller=<%= seller_id %>" method="post">
 				<div class="form-group row">
 					<label class="col-sm-3 align-self-center mb-0">이름</label>
 					<div class="col-sm-8">
