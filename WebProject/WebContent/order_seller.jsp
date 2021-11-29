@@ -14,6 +14,20 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="./resources/css/styles.css" rel="stylesheet" />
+    <script type="text/javascript">
+    	function changeStatus(status, id) {
+    		if (status == '주문 확인') {
+    			if (confirm("주문을 확인 하시겠습니까?"))
+    				location.href="changeStatus.jsp?id="+id+"&status=1";    			
+    		} else if (status == '배송 시작') {
+    			if (confirm("배송을 시작 하시겠습니까?"))
+    				location.href="changeStatus.jsp?id="+id+"&status=2";
+    		} else {
+    			if (confirm("배송을 완료 하시겠습니까?"))
+    				location.href="changeStatus.jsp?id="+id+"&status=3";
+    		}
+    	}
+    </script>
 </head>
 <body>
 	<%
@@ -21,7 +35,7 @@
 		String role = (String) session.getAttribute("role");
 		String userId = (String) session.getAttribute("userID");
 		
-		if (role == null || userId == null || !role.equals("customer"))
+		if (role == null || userId == null || !role.equals("seller"))
 			response.sendRedirect("NoPermission.jsp");
 	%>
 	<jsp:include page="nav.jsp"/>
@@ -35,9 +49,9 @@
 		<div class="row">
 			<div class="col-md-2">
 				<div class="btn-group-vertical col-md">
-					<button type="button" class="btn btn-outline-dark" onclick="location.href='myInfo_customer.jsp?id=<%= userId %>'" style="padding: 10px 20px;">계정</button>
-					<button type="button" class="btn btn-outline-dark" onclick="location.href='cart.jsp'" style="padding: 10px 20px;">장바구니</button>
-					<button type="button" class="btn btn-outline-dark" onclick="location.href='order_customer.jsp'" style="padding: 10px 20px;">주문현황</button>
+					<button type="button" class="btn btn-outline-dark" onclick="location.href='myInfo_seller.jsp?id=<%= userId %>'" style="padding: 10px 20px;">계정</button>
+					<button type="button" class="btn btn-outline-dark" onclick="location.href='productManagement.jsp'" style="padding: 10px 20px;">장바구니</button>
+					<button type="button" class="btn btn-outline-dark" onclick="location.href='order_seller.jsp'" style="padding: 10px 20px;">주문현황</button>
 				</div>
 			</div>
 			<div class="col-md">
@@ -49,7 +63,7 @@
 						<div class="container p-0" align="left">
 							<table class="table table-striped table-bordered text-center">
 								<tr class="border border-1 border-dark">
-									<th class="col-md-3">판매자</th>
+									<th class="col-md-3">구매자</th>
 									<th class="col-md-3">제품명</th>
 									<th class="col-md-3">가격</th>
 									<th class="col-md-2">개수</th>
@@ -60,32 +74,35 @@
 									ResultSet rs = null;
 									Statement stmt = null;
 									try {
-										String sql = "select a.seller_id, b.name, b.price, a.product_cnt, a.status_c from orderform a, product b where a.product_id = b.id and customer_id = '"+ userId+"'";
+										String sql = "select a.id, a.customer_id, b.name, b.price, a.product_cnt, a.status_s from orderform a, product b where a.product_id = b.id and a.seller_id = '"+ userId+"'";
 										stmt = conn.createStatement();
 										rs = stmt.executeQuery(sql);
 										
 										while (rs.next()) {
-											String seller = rs.getString("seller_id");
+											String seller = rs.getString("customer_id");
 											String name = rs.getString("name");
 											int price = rs.getInt("price");
 											int cnt = rs.getInt("product_cnt");
-											String status = rs.getString("status_c"); 
+											int id = rs.getInt("id");
+											String status = rs.getString("status_s"); 
 											
-											String badge_color = "badge-primary";
-											if (status.equals("배송 준비 중"))
-												badge_color = "badge-success";
-											if (status.equals("배송 중"))
-												badge_color = "badge-info";
+											String btn_color = "btn-primary";
+											if (status.equals("배송 시작"))
+												btn_color = "btn-success";
 											if (status.equals("배송 완료"))
-												badge_color = "badge-dark";
+												btn_color = "btn-info";
 											%>
 									
 									<tr>
-										<td><%= seller %></td>
-										<td><%= name %></td>
-										<td><%= price %></td>
-										<td><%= cnt %></td>
-										<td><p class="badge <%= badge_color %> m-0"><%= status %></p></td>
+										<td class="align-middle"><%= seller %></td>
+										<td class="align-middle"><%= name %></td>
+										<td class="align-middle"><%= price %></td>
+										<td class="align-middle"><%= cnt %></td>
+										<% if (!status.equals("finish")){ %>
+										<td><button onclick="changeStatus('<%= status %>', <%= id %>)" type="button" class="btn <%= btn_color %> p-1" style="font-size: 1.0rem;"><%= status %></button></td>
+										<% } else {%>
+										<td><button onclick="changeStatus('<%= status %>', <%= id %>)" type="button" class="btn btn-dark p-1" style="font-size: 1.0rem;" disabled>배송 완료</button></td>
+										<% } %>
 									</tr>
 									
 											
