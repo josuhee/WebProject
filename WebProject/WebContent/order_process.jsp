@@ -1,24 +1,12 @@
 <%@ page contentType="text/html; charset=utf-8" %>
-<%@ page import="java.net.URLDecoder" %>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="dto.Product" %>
-<html>
-<head>
-<title>Check Cookie</title>
-<script type="text/javascript">
-	function checkInfo(name, zipcode, address, seller_id) {
-		if (!confirm("성함 : " + name + "\n우편번호 : " + zipcode + "\n주소 : " + address + "\n\n 해당 주소가 맞습니까?")) {
-			location.href="shippingInfo.jsp?seller="+seller_id;
-		} else {
-			location.href="order_process.jsp?seller="+seller_id;
-		}
-	}
-</script>
-</head>
-<body>
+<%@ page import="java.net.URLDecoder" %>
+<%@ page import="java.sql.*" %>
 <%
 	request.setCharacterEncoding("utf-8");
 	String seller_id = request.getParameter("seller");
+
 	String role = (String) session.getAttribute("role");
 	String userId = (String) session.getAttribute("userID");
 	
@@ -68,14 +56,55 @@
 			if (shipping_name.equals("") || shipping_zipcode.equals("") || shipping_address.equals(""))
 				flag = false;
 			
-			if (flag) {%>
-				<script>checkInfo('<%= shipping_name %>', '<%=shipping_zipcode%>', '<%=shipping_address%>', '<%= seller_id%>')</script>
+			if (flag == false)
+				response.sendRedirect("errorPage.jsp");
+			else {
+			
+			// insert information in order table %>
+			<%@ include file="dbconn.jsp" %>
 			<%
-			} else {
-				response.sendRedirect("shippingInfo.jsp?seller=" + seller_id);
-			}					
+				PreparedStatement pstmt = null;
+				try {
+					for (int i = 0; i < cartList.size(); i++) {
+						Product product = cartList.get(i);
+						if (product.getSeller().equals(seller_id)) {
+							String sql ="insert into orderform(customer_id, seller_id, product_id, product_cnt, ship_name, ship_zipcode, ship_address, status_c, status_s) " +
+										"value(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+							pstmt = conn.prepareStatement(sql);
+							pstmt.setString(1, userId);
+							pstmt.setString(2, seller_id);
+							pstmt.setInt(3, product.getId());
+							pstmt.setInt(4, product.getCnt());
+							pstmt.setString(5, shipping_name);
+							pstmt.setString(6, shipping_zipcode);
+							pstmt.setString(7, shipping_address);
+							pstmt.setString(8, "주문 확인 중");
+							pstmt.setString(9, "주문 확인");
+							pstmt.executeUpdate();
+						}
+					}
+					
+				} catch (SQLException ex) {
+					out.print("Orderform 테이블 삽입이 실패했습니다.<br/>");
+					out.print("SQLException: " + ex.getMessage());
+				} finally {
+					if (pstmt != null)
+						pstmt.close();
+					if (conn != null)
+						conn.close();
+				}
+			
+				// delete information in arraylist
+				for (int i = 0; i < cartList.size(); i++) {
+					Product product = cartList.get(i);
+					if (product.getSeller().equals(seller_id)) {
+						cartList.remove(i);
+						i--;					
+					}
+				}
+			 	response.sendRedirect("cart.jsp");
+			}
 		}
 	}
+	
 %>
-</body>
-</html>
