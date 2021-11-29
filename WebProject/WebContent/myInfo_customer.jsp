@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <html>
 <head>
-	<title>Welcome</title>
+	<title>내 정보</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 	<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Font Awesome icons (free version)-->
@@ -36,7 +36,7 @@
 				<div class="btn-group-vertical col-md">
 					<button type="button" class="btn btn-outline-dark" onclick="location.href='myInfo_customer.jsp?id=<%= s_id %>'" style="padding: 10px 20px;">계정</button>
 					<button type="button" class="btn btn-outline-dark" onclick="location.href='cart.jsp'" style="padding: 10px 20px;">장바구니</button>
-					<button type="button" class="btn btn-outline-dark" style="padding: 10px 20px;">주문현황</button>
+					<button type="button" class="btn btn-outline-dark" onclick="location.href='order_customer.jsp'" style="padding: 10px 20px;">주문현황</button>
 				</div>
 			</div>
 			<%-- 본문 --%>

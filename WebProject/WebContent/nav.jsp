@@ -18,7 +18,7 @@
             			<li class="nav-item"><a class="nav-link" href="addProduct.jsp">Product</a></li>
             	<%	} %>
                 <li class="nav-item"><a class="nav-link" href="products.jsp">Market</a></li>
-                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="home.jsp#about">About</a></li>
                 <%
                 	if (role != null && id != null){ %>
 	                	<li class="nav-item"><a class="nav-link" href="myInfo_<%=role%>.jsp?id=<%=id%>">My</a></li>                		
