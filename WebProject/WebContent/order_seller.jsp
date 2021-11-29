@@ -74,7 +74,8 @@
 									ResultSet rs = null;
 									Statement stmt = null;
 									try {
-										String sql = "select a.id, a.customer_id, b.name, b.price, a.product_cnt, a.status_s from orderform a, product b where a.product_id = b.id and a.seller_id = '"+ userId+"'";
+										String sql = "select a.id, a.customer_id, b.name, b.price, a.product_cnt, a.status_s from orderform a, product b where a.product_id = b.id and a.seller_id = '"+ userId+"'" +
+														" order by a.id desc";
 										stmt = conn.createStatement();
 										rs = stmt.executeQuery(sql);
 										

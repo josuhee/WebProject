@@ -46,7 +46,7 @@
 					<div class="timeline-panel">
 						<div class="timeline-heading">
 							<h4>왜 필요한가 ?</h4>
-							<h4 class="subheading">An Agency is Born</h4>
+							<h4 class="subheading">Why do we need this store?</h4>
 						</div>
 						<div class="timeline-body"><p class="text-muted">너무 소량의 제품은 주문 제작하기도 힘들고, 그렇다고 공장에서 찍어내는 제품들은 메리트가 없는 법이죠. 이곳은 멋진 작가님들이 자신들이 직접 만드는 제품들을 올리고 고객들은 자신의 마음에 쏙 드는 제품을 찾을 수 있도록 해주는 상점입니다.</p></div>
 					</div>
@@ -56,7 +56,7 @@
 					<div class="timeline-panel">
 						<div class="timeline-heading">
 							<h4>고객은 ...</h4>
-							<h4 class="subheading">Transition to Full Service</h4>
+							<h4 class="subheading">To the customer</h4>
 						</div>
 						<div class="timeline-body"><p class="text-muted">고객은 원하는 제품의 재고 수량을 확인하고 추가 요청사항을 첨부함으로써 원하는 제품을 손쉽게 획득할 수 있습니다. 세상에 딱 하나만 있는 자신만의 물건을 소유해 보는 것은 어떨까요 ?</p></div>
 					</div>
@@ -66,7 +66,7 @@
 					<div class="timeline-panel">
 						<div class="timeline-heading">
 							<h4>판매자는 ...</h4>
-							<h4 class="subheading">Phase Two Expansion</h4>
+							<h4 class="subheading">To the seller</h4>
 						</div>
 						<div class="timeline-body"><p class="text-muted">자신이 만든 물건을 판매해보고 싶지 않으신가요? 너무 소량이어도 걱정마세요. 이 곳, 당신의 작은 상점은 그 어떤 것이라도 판매할 준비가 되어있답니다.</p></div>
 					</div>
