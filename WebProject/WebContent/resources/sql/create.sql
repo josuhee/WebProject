@@ -37,13 +37,3 @@ create table if not exists orderform(
 	foreign key (customer_id) references customer(id),
 	foreign key (product_id) references product(id)
 )DEFAULT CHARSET=utf8;
-
-
-
-desc customer;
-select * from seller;
-
-insert into product(name) values("hi2");
-select * from product;
-delete from product where id = 2;
-drop table orderform;
