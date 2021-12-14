@@ -30,3 +30,5 @@
 <br/>  
 
 ## ✔ 미리보기
+![image](https://user-images.githubusercontent.com/69746967/145999144-0ba81fd3-6432-4246-a6ce-6928440e6742.png)
+
